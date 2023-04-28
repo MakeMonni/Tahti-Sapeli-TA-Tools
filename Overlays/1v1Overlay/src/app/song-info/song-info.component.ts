@@ -18,17 +18,17 @@ export class SongInfoComponent implements OnInit {
   ) {}
 
   public songName: string = 'No song selected';
-  public songSubName: string = 'sub name';
-  public nps: number = 12;
-  public bpm: number = 120;
+  public songSubName: string = '';
+  public nps: number = 0;
+  public bpm: number = 0;
   public duration: string = '0:00';
-  public mapper: string = 'mabber 123 & bob';
-  public songAuthor: string = 'Bob69Slayer';
+  public mapper: string = '';
+  public songAuthor: string = '';
   public coverImageUrl: string =
     'https://cdn.discordapp.com/attachments/840144337231806484/1100119704674250812/Beat_Saber_Finland-hehkuton_smol.jpg';
-  public bsrKey: string = '123';
-  public diffId: string = 'ExpertPlus';
-  public diffString: string = 'Expert+';
+  public bsrKey: string = '';
+  public diffId: string = '';
+  public diffString: string = '';
 
   public songNameTag: string =
     '<marquee direction="left" scrollamount="5" class="song">{{songName}}</marquee>';
