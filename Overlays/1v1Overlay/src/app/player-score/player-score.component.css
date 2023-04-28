@@ -1,0 +1,57 @@
+.outer{
+    position: absolute;
+    right: 980px;
+    bottom: 10px;
+}
+
+p{
+    color: white;
+    text-shadow: 0px 0px 8px black;
+    text-align: end;
+    margin: 0;
+}
+
+.acc{
+    font-size: 65px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.score{
+    font-size: 35px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.comboAndMiss {
+    font-size: 30px;
+}
+
+.missicon {
+    color: red;
+    font-weight: 700;
+    font-family: sans-serif;
+    font-stretch: ultra-expanded;
+    font-size: 35px;
+    text-shadow: 0px 0px 2px black;
+}
+
+.redFlash {
+    position: absolute;
+    width: 949px;
+    height: 731px;
+    top: 174px;
+    left: 6px;
+    animation-name: flash;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+}
+
+@keyframes flash {
+    0% {
+        box-shadow: inset 0px 0px 100px red;
+        }
+    80% {
+        box-shadow: inset 0px 0px 100px red;
+    }
+  }

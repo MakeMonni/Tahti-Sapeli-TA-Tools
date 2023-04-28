@@ -1,0 +1,10 @@
+<div class="outer">
+  <div class="border">
+    <p>{{playerName}}</p>
+  </div>
+  <img src={{playerImageUrl}} class="mask" />
+</div>
+
+<div class="points">
+  <div class="pointBox" *ngFor="let box of boxes.slice().reverse(); let i = index" [ngClass]="{'pointScored': i >= (boxes.length - thisPlayerScore)}"></div>
+</div>

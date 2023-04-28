@@ -1,0 +1,5 @@
+{
+    "url": "ta websocket url",
+    "wsport": xxxx,
+    "outgoingSocket":  "ws://xxx:xxx"
+}
