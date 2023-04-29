@@ -82,7 +82,7 @@ client.on("matchCreated", e => {
         matchUsers: e.data.associated_users.map(x => connectedUsers.find(y => y.guid === x)),
         song: undefined
     }
-    match.matchUsers.sort(a, b => a.name > b.name)
+    match.matchUsers.sort((a, b) => a.name > b.name)
     matches.push(match);
 
     e.data.associated_users.push(client.Self.guid);
