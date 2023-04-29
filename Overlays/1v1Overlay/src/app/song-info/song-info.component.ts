@@ -84,9 +84,7 @@ export class SongInfoComponent implements OnInit {
               this.nps = Number(diff.nps.toFixed(2));
 
               const time = (seconds: number) =>
-                `${Math.floor(seconds / 60)}:${seconds % 60 < 10 ? '0' : ''}${
-                  seconds % 60
-                }`;
+                `${Math.floor(seconds / 60)}:${seconds % 60 < 10 ? '0' : ''}${(seconds % 60).toFixed(2)}`;
               this.duration = time(diff.seconds);
             } catch (err) {
               console.log('Diff not selected');
