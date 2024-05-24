@@ -1,0 +1,38 @@
+<div>
+    <label for="userInput">Enter secret:</label>
+    <input type="text" id="userInput" #userInput>
+    <button (click)="saveToMemory()">Save</button>
+</div>
+
+<div class="Match">
+    <li *ngFor="let match of matches">
+        <div>Coordinator: {{match.coordinatorUser.name}}</div>
+        <label for="poolUpload">Upload pool: </label>
+        <input type="file" (change)="poolUploaded($event, match.coordinatorUser)" accept=".json,.bplist"
+            name="poolUpload"><br><br>
+        <button (click)="matchSelected(match.coordinatorUser)">View this match on Overlay</button>
+        <h4>Players</h4>
+        <div *ngFor="let player of match.matchUsers" class="player-container">
+            {{player.name}}
+        </div>
+
+        <div *ngFor="let map of match.pool" class="map-container">
+            <h4>{{map.metadata.songName}} {{map.metadata.songSubName}} | code: <span id="copyText" (click)="copyText($event)">{{map.key}}</span></h4>
+            <div *ngFor="let player of match.matchUsers">
+                <div class="checkbox-container">
+                    {{player.name}}
+                    <span class="win-checkbox-label">
+                        <input type="checkbox"
+                            (change)="mapWon($event, map.versions[0].hash, player.name, player.userId)">Win
+                    </span>
+                    <span class="ban-checkbox-label">
+                        <input type="checkbox" (change)="mapBanned($event, map.versions[0].hash, player.userId)">Ban
+                    </span>
+                    <span class="pick-checkbox-label">
+                        <input type="checkbox" (change)="mapPicked($event, map.versions[0].hash, player.userId)">Pick
+                    </span>
+                </div>
+            </div>
+        </div>
+    </li>
+</div>

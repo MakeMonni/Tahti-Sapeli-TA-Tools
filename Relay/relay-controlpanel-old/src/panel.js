@@ -2,7 +2,7 @@ import React from "react";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import ReactDOM from "react-dom";
 import config from "./config.json"
-import '../src/panel.css'
+import './panel.css'
 
 const client = new W3CWebSocket(config.realyServerUrl);
 

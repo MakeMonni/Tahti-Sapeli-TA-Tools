@@ -1,6 +1,9 @@
 <div class="outer">
   <p class="acc">{{acc}}%</p>
   <p class="score">{{score}}</p>
-  <p class="comboAndMiss">{{combo}} <span class="missicon">x </span>{{misses}}</p>
+  <div class="comboAndMiss">
+    <p><span class="missicon">X </span>{{misses}}</p>
+    <p>{{combo}} </p>
+  </div>
 </div>
 <div class="redFlash" *ngIf="isMissed"></div>

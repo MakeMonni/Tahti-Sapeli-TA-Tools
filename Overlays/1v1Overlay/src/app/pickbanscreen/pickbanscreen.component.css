@@ -1,0 +1,31 @@
+#fullscreen {
+    height: 1080px;
+    width: 1920px;
+    position: fixed;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    background-image: url("../../assets/Finge.png");
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    /* visibility: hidden; */
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 5%;
+    row-gap: 100px;
+    margin-top: 65px;
+}
+
+.map {
+    height: 100px;
+    width: 500px;
+    border-radius: 10px;
+}

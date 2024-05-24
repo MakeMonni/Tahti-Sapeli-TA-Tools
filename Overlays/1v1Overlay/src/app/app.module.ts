@@ -11,6 +11,8 @@ import { PlayerScore2Component } from './player-score2/player-score2.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { ReversePipe } from './reverse.pipe';
+import { PickbanscreenComponent } from './pickbanscreen/pickbanscreen.component';
+import { PickbanmapComponent } from './pickbanmap/pickbanmap.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { ReversePipe } from './reverse.pipe';
     PlayerScoreComponent,
     PlayerScore2Component,
     ReversePipe,
+    PickbanscreenComponent,
+    PickbanmapComponent,
   ],
   imports: [
     BrowserModule,

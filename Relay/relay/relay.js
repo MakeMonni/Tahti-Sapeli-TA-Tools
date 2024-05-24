@@ -1,10 +1,11 @@
 const taClient = require("tournament-assistant-client");
 const config = require("./config.json");
 const WebSocket = require('ws');
+const jwt = require('jsonwebtoken');
 
-const port = config.wsport;
-
-const wss = new WebSocket.Server({ "port": port });
+const wss = new WebSocket.Server({ "port": config.wsport });
+const sockets = new WebSocket(config.outgoingSocket);
+const controlWs = new WebSocket.Server({ "port": config.controlSocketPort });
 
 wss.on('connection', function connection(ws) {
     ws.on('message', function message(data, isBinary) {
@@ -18,11 +19,8 @@ wss.on('connection', function connection(ws) {
 });
 
 const client = new taClient.Client("", {
-    url: config.url
+    url: config.taUrl
 })
-
-const ws = new WebSocket(config.outgoingSocket);
-sockets = ws;
 
 let connectedUsers = [];
 let matchUsersToFollow = [];
@@ -42,11 +40,11 @@ client.on("close", e => {
 })
 
 client.on("taConnected", e => {
-    console.log("TA connected")
+    console.log("TA client connected")
 })
 
 client.on("wsConnected", e => {
-    console.log("WS connected")
+    console.log("TA WS client connected")
 })
 
 client.on("userAdded", e => {
@@ -80,7 +78,8 @@ client.on("matchCreated", e => {
     const match = {
         coordinatorUser: connectedUsers.find(x => x.guid === e.data.leader),
         matchUsers: e.data.associated_users.map(x => connectedUsers.find(y => y.guid === x)),
-        song: undefined
+        song: undefined,
+        pool: undefined,
     }
     match.matchUsers.sort((a, b) => a.name > b.name)
     matches.push(match);
@@ -136,29 +135,75 @@ function indexToName(index) {
     }
 }
 
-sockets.on('message', function (msg) {
+sockets.on('message', function (msg) {msg = JSON.parse(msg);
+    if (msg.type === "matchesPlease") {
+        sockets.send(JSON.stringify({type: "coordinatorFollow", coordinatorId: coordinatorIdToFollow}));
+        sockets.send(JSON.stringify({ matches: matches, type: "matches" }));
+    }
+});
+
+controlWs.on('connection', function connection(ws, request) {
+    //const origin = request.headers.origin;
+    //const ip = request.socket.remoteAddress;
+    const token = request.url.split('?token=')[1];
+
+    if (!token) {
+        ws.close(1008, "Token not provided");
+        return;
+    }
     try {
-        msg = JSON.parse(msg);
-        if (msg.type === "matchesPlease") {
-            sockets.send(JSON.stringify({type: "coordinatorFollow", coordinatorId: coordinatorIdToFollow}));
-            sockets.send(JSON.stringify({ matches: matches, type: "matches" }));
-        }
-        else if(msg.type === "matchPoint"){
-            console.log("Match point event", msg.player, msg.incrementDecrement);
-            sockets.send(JSON.stringify({type: "matchPoint", playerId: msg.player, incrementDecrement: msg.incrementDecrement}));
-        }
-        else {
-            let match = matches.find(x => x.coordinatorUser.name === msg.name);
-            let playerGuids = match.matchUsers.map(x => x.userId);
-            matchUsersToFollow = playerGuids;
-            coordinatorIdToFollow = match.coordinatorUser.guid;
+        const decoded = jwt.verify(token, config.jwtSecret);
+        console.log("Valid token", decoded);
+        ws.send("Connection established");
 
-            sockets.send(JSON.stringify({type: "coordinatorFollow", coordinatorId: coordinatorIdToFollow}));
-            sockets.send(JSON.stringify({ matches: matches, type: "matches" }));
-        }
+        ws.on('message', function (msg) {
+            try {
+                msg = JSON.parse(msg);
+                console.log("Control ws msg")
+                if (msg.type === "matchesPlease") {
+                    sockets.send(JSON.stringify({ type: "coordinatorFollow", coordinatorId: coordinatorIdToFollow }));
+                    sockets.send(JSON.stringify({ matches: matches, type: "matches" }));
+                }
+                else if (msg.type === "matchPoint") {
+                    console.log("Match point event", msg.player, msg.incrementDecrement);
+                    sockets.send(JSON.stringify({ type: "matchPoint", playerId: msg.player, incrementDecrement: msg.incrementDecrement }));
+                }
+                else if (msg.type === "poolChangeClient") {
+                    matches[matches.findIndex(x => msg.coordinatorUser.guid === x?.coordinatorUser?.guid)].pool = msg.pool.songs;
 
+                    sockets.send(JSON.stringify({ type: "matches", matches: matches }));
+                    //sockets.send(JSON.stringify({ type: "poolChange", matches: matches }));
+
+                }
+                else if (msg.type === "pickBanClient") {
+                    console.log("Received a pick/ban")
+                    sockets.send(JSON.stringify({ type: "pickBan", pickBan: msg.pickBan, hash: msg.hash, player: msg.player, undo: msg.undo }))
+                }
+                else if (msg.type === "clientMapWon") {
+                    console.log("Received a map winning")
+                    sockets.send(JSON.stringify({ type: "mapWon", hash: msg.hash, player: msg.player, undo: msg.undo, playerId: msg.playerId }))
+                }
+                else if (msg.type === "coordinatorFollow") {
+                    const match = matches.find(x => x.coordinatorUser.name === msg.coordinatorUser.name);
+                    const playerGuids = match.matchUsers.map(x => x.userId);
+                    matchUsersToFollow = playerGuids;
+                    coordinatorIdToFollow = match.coordinatorUser.guid;
+
+                    sockets.send(JSON.stringify({ type: "coordinatorFollow", coordinatorId: coordinatorIdToFollow }));
+                    sockets.send(JSON.stringify({ type: "matches", matches: matches }));
+                }
+                else {
+                    console.log("Unknown message type")
+                    console.log(msg);
+                }
+
+            }
+            catch (err) {
+                console.log(err)
+            }
+        })
     }
     catch (err) {
-        console.log(err)
+        ws.close(1008, "Inavlid token")
     }
-})
+});

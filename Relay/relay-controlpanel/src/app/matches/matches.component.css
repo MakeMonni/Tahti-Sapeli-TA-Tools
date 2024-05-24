@@ -1,0 +1,73 @@
+.Match {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.Match li {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    width: calc(40%); /* Adjust width to fit three matches per row, including gap */
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+.Match h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.Match label {
+    font-weight: bold;
+}
+
+.Match .checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust gap as needed */
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.Match .ban-checkbox-label {
+    background-color: red;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.Match .pick-checkbox-label {
+    background-color: green;
+    color: white;
+    padding: 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.Match .win-checkbox-label {
+    background-color: orange;
+    color: black;
+    padding: 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.Match .map-container {
+    margin-top: 20px;
+}
+
+.Match .player-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.copyText {
+    background-color: rgb(51, 49, 49);
+}

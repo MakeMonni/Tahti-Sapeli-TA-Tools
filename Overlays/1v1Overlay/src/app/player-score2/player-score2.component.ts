@@ -27,6 +27,7 @@ export class PlayerScore2Component implements OnInit {
   public isMissed: boolean = false;
 
   ngOnInit() {
+    
     this.webSocketService.connect().subscribe((message) => {
       if (
         message.type === 'score' &&

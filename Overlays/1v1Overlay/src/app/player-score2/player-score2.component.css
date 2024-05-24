@@ -1,30 +1,37 @@
 .outer{
     position: absolute;
     left: 980px;
-    bottom: 10px;
+    bottom: 30px;
 }
 
 p{
     color: white;
-    text-shadow: 0px 0px 8px black;
+    text-shadow: rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px, rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px, rgb(0, 0, 0) 0px 0 8px, rgb(0, 0, 0) 0px 0 8px, rgb(0, 0, 0) 0px 0 8px,
+    rgb(0, 0, 0) 0px 0 15px, rgb(0, 0, 0) 0px 0 15px, rgb(0, 0, 0) 0px 0 15px, rgb(0, 0, 0) 0px 0 15px, rgb(0, 0, 0) 0px 0 15px, rgb(0, 0, 0) 0px 0 15px, rgb(0, 0, 0) 0px 0 15px, rgb(0, 0, 0) 0px 0 15px;
     text-align: start;
     margin: 0;
 }
 
 .acc{
-    font-size: 65px;
+    font-size: 50px;
     margin: 0px;
     padding: 0px;
 }
 
 .score{
-    font-size: 35px;
+    font-size: 25px;
     margin: 0px;
     padding: 0px;
 }
 
 .comboAndMiss {
-    font-size: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    width: 200px;
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 .missicon {
@@ -32,8 +39,7 @@ p{
     font-weight: 700;
     font-family: sans-serif;
     font-stretch: ultra-expanded;
-    font-size: 35px;
-    text-shadow: 0px 0px 2px black;
+    text-shadow: rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px, rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px, rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px,rgb(0, 0, 0) 0px 0 8px;
 }
 
 .redFlash {
@@ -49,9 +55,9 @@ p{
 
 @keyframes flash {
     0% {
-        box-shadow: inset 0px 0px 100px red;
+        box-shadow: inset 0px 0px 50px red;
         }
     80% {
-        box-shadow: inset 0px 0px 100px red;
+        box-shadow: inset 0px 0px 50px red;
     }
   }

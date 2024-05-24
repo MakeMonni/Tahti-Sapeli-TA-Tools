@@ -1,5 +1,7 @@
-<app-song-info></app-song-info>
 <router-outlet></router-outlet>
+<app-pickbanscreen *ngIf="isInPickban()"></app-pickbanscreen>
+
+<app-song-info></app-song-info>
 <app-player></app-player>
 <app-player2></app-player2>
 <app-player-score></app-player-score>

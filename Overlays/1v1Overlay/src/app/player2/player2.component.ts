@@ -11,9 +11,9 @@ export class Player2Component implements OnInit {
   constructor(
     private webSocketService: WebsocketService,
     private playerService: PlayerService
-  ) {}
+  ) { }
 
-  public thisPlayer: any = {};
+  public thisPlayer: any = {userId: "76561198061930684"};
   public thisPlayerScore: number = 0;
   public boxes: any[] = Array(3).fill(null);
   public playerName: string = 'Player';
@@ -22,11 +22,17 @@ export class Player2Component implements OnInit {
 
   ngOnInit() {
     this.webSocketService.connect().subscribe((message) => {
-      if (message.type === 'matchPoint' && message.player === this.thisPlayer.userId) {
-        if (message.incrementDecrement === 'increment' && this.thisPlayerScore < 3) {
-          console.log("here")
+
+      console.log("p2",message.playerId)
+      console.log("p2",this.thisPlayer.userId)
+
+      if (message.type === 'mapWon' && message.playerId === this.thisPlayer.userId) {
+
+        if (!message.undo && this.thisPlayerScore < 3) {
           this.thisPlayerScore++;
-        } else if (message.incrementDecrement === 'decrement' && this.thisPlayerScore > 0) {
+        }
+
+        else if (this.thisPlayerScore > 0 && message.undo) {
           this.thisPlayerScore--;
         }
       }
