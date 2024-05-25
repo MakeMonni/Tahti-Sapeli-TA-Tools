@@ -8,7 +8,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 export class WebsocketService {
   private subject: WebSocketSubject<any>;
 
-  private websocketUrl = 'wss://51.158.180.28:45555'; 
+  private websocketUrl = 'https://ta-relay.monni.moe/websocket'; 
   //private websocketUrl = 'ws://localhost:45555'; 
 
   constructor() {
