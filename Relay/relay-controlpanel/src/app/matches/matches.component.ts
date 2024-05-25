@@ -197,7 +197,7 @@ export class MatchesComponent implements OnInit {
 
         console.log(coordinator);
 
-        const response = await fetch(`https://api.monni.moeoverlayFollowCoordinator`, {
+        const response = await fetch(`https://api.monni.moe/overlayFollowCoordinator`, {
           method: 'post',
           body: JSON.stringify({ coordinatorUser: coordinator, auth: this.secretKey }),
           headers: { 'Content-Type': 'application/json' }
