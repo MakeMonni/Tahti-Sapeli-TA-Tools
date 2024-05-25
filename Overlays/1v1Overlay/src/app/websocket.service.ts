@@ -7,8 +7,8 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 })
 export class WebsocketService {
   private subject: WebSocketSubject<any>;
-  
-  private websocketUrl = 'ws://51.158.180.28:45555'; 
+
+  private websocketUrl = 'wss://51.158.180.28:45555'; 
   //private websocketUrl = 'ws://localhost:45555'; 
 
   constructor() {
