@@ -17,17 +17,17 @@ export class SongInfoComponent implements OnInit {
     private domSanitizer: DomSanitizer
   ) { }
 
-  public songName: string = 'FEHLT';
+  public songName: string = '';
   public songSubName: string = '';
-  public nps: number = 12.3;
-  public bpm: number = 234;
+  public nps: number = 0;
+  public bpm: number = 0;
   public duration: string = '0:00';
-  public mapper: string = 'Nolaniyymationsy';
-  public songAuthor: string = 'Schwank';
-  public coverImageUrl: string = 'https://eu.cdn.beatsaver.com/2b4fb21d8752a3b07a8dfbd7a1082e1a1448427a.jpg';
-  public bsrKey: string = '17e17';
-  public diffId: string = 'Easy';
-  public diffString: string = 'Easy';
+  public mapper: string = '';
+  public songAuthor: string = '';
+  public coverImageUrl: string = '';
+  public bsrKey: string = '';
+  public diffId: string = '';
+  public diffString: string = '';
 
   public songNameTag: string =
     '<marquee direction="left" scrollamount="5" class="song">{{songName}}</marquee>';

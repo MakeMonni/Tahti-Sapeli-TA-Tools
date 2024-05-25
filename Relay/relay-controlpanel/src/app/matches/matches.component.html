@@ -17,7 +17,7 @@
         </div>
 
         <div *ngFor="let map of match.pool" class="map-container">
-            <h4>{{map.metadata.songName}} {{map.metadata.songSubName}} | code: <span id="copyText" (click)="copyText($event)">{{map.key}}</span></h4>
+            <h4>{{map.metadata.songName}} {{map.metadata.songSubName}} | code: <span id="copyText" (click)="copyText($event)">{{map.key}}</span></h4> <label for="notes">Notes:</label> <input type="text" id="notes" > 
             <div *ngFor="let player of match.matchUsers">
                 <div class="checkbox-container">
                     {{player.name}}

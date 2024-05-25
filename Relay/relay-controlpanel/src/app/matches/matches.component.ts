@@ -194,7 +194,10 @@ export class MatchesComponent implements OnInit {
   async matchSelected(coordinator: any) {
     if (this.secretSet()) {
       try {
-        const response = await fetch(`https://api.monni.moe/overlayFollowCoordinator`, {
+
+        console.log(coordinator);
+
+        const response = await fetch(`https://api.monni.moeoverlayFollowCoordinator`, {
           method: 'post',
           body: JSON.stringify({ coordinatorUser: coordinator, auth: this.secretKey }),
           headers: { 'Content-Type': 'application/json' }

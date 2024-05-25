@@ -13,7 +13,7 @@ export class Player2Component implements OnInit {
     private playerService: PlayerService
   ) { }
 
-  public thisPlayer: any = {userId: "76561198061930684"};
+  public thisPlayer: any = { userId: "76561198061930684" };
   public thisPlayerScore: number = 0;
   public boxes: any[] = Array(3).fill(null);
   public playerName: string = 'Player';
@@ -23,8 +23,8 @@ export class Player2Component implements OnInit {
   ngOnInit() {
     this.webSocketService.connect().subscribe((message) => {
 
-      console.log("p2",message.playerId)
-      console.log("p2",this.thisPlayer.userId)
+      console.log("p2", message.playerId)
+      console.log("p2", this.thisPlayer.userId)
 
       if (message.type === 'mapWon' && message.playerId === this.thisPlayer.userId) {
 
@@ -42,8 +42,12 @@ export class Player2Component implements OnInit {
       if (players[1] !== undefined && players[1] !== '') {
         this.thisPlayer = players[1];
         this.playerName = players[1].name;
+        this.thisPlayerScore = 0;
         if (players[1].userId.length === 17) {
           this.playerImageUrl = `https://cdn.scoresaber.com/avatars/${players[1].userId}.jpg`;
+        }
+        else {
+          this.playerImageUrl = `https://cdn.scoresaber.com/avatars/oculus.png`
         }
       }
     });

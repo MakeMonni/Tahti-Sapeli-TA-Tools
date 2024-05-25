@@ -41,8 +41,12 @@ export class PlayerComponent implements OnInit {
       if (players[0] !== '' && players[0] !== undefined) {
         this.thisPlayer = players[0];
         this.playerName = players[0].name;
+        this.thisPlayerScore = 0;
         if (players[0].userId.length === 17) {
           this.playerImageUrl = `https://cdn.scoresaber.com/avatars/${players[0].userId}.jpg`;
+        }
+        else {
+          this.playerImageUrl = `https://cdn.scoresaber.com/avatars/oculus.png`
         }
       }
     });
