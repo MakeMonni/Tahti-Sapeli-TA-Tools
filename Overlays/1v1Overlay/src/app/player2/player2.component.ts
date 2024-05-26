@@ -38,7 +38,7 @@ export class Player2Component implements OnInit {
 
       if (players[1] !== undefined && players[1] !== "") {
 
-        if (this.thisPlayer !== players[1]) {
+        if (this.thisPlayer.toString() !== players[1].toString()) {
           console.log("Resetting player score", this.thisPlayer, players[1])
           this.thisPlayerScore = 0;
         }
