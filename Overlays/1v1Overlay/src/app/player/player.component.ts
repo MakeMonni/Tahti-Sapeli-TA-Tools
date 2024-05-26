@@ -38,10 +38,16 @@ export class PlayerComponent implements OnInit {
     });
 
     this.playerService.currentPlayers.subscribe((players) => {
-      if (players[0] !== '' && players[0] !== undefined) {
+      if (players[0] !== "" && players[0] !== undefined) {
+
+        if (this.thisPlayer.toString() !== players[0].toString()) {
+          console.log("Resetting player score", this.thisPlayer, players[0])
+          this.thisPlayerScore = 0;
+        }
+
         this.thisPlayer = players[0];
         this.playerName = players[0].name;
-        this.thisPlayerScore = 0;
+
         if (players[0].userId.length === 17) {
           this.playerImageUrl = `https://cdn.scoresaber.com/avatars/${players[0].userId}.jpg`;
         }

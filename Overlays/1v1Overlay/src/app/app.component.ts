@@ -12,7 +12,6 @@ export class AppComponent {
   constructor(private router: Router) {}
 
   isInPickban(): boolean {
-    console.log("Route is in pickban?", this.router.url.includes('/pickban'))
     return this.router.url.includes('/pickban');
   }
 }

@@ -23,9 +23,6 @@ export class Player2Component implements OnInit {
   ngOnInit() {
     this.webSocketService.connect().subscribe((message) => {
 
-      console.log("p2", message.playerId)
-      console.log("p2", this.thisPlayer.userId)
-
       if (message.type === 'mapWon' && message.playerId === this.thisPlayer.userId) {
 
         if (!message.undo && this.thisPlayerScore < 3) {
@@ -38,11 +35,17 @@ export class Player2Component implements OnInit {
       }
     });
     this.playerService.currentPlayers.subscribe((players) => {
-      console.log(players);
-      if (players[1] !== undefined && players[1] !== '') {
+
+      if (players[1] !== undefined && players[1] !== "") {
+
+        if (this.thisPlayer !== players[1]) {
+          console.log("Resetting player score", this.thisPlayer, players[1])
+          this.thisPlayerScore = 0;
+        }
+
         this.thisPlayer = players[1];
         this.playerName = players[1].name;
-        this.thisPlayerScore = 0;
+
         if (players[1].userId.length === 17) {
           this.playerImageUrl = `https://cdn.scoresaber.com/avatars/${players[1].userId}.jpg`;
         }
